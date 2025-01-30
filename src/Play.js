@@ -27,12 +27,12 @@ class Play extends Phaser.Scene {
     create() {
         // add background grass
         this.grass = this.add.image(0, 0, 'grass').setOrigin(0)
-        this.shotText = this.add.text(0, 0, 'Shot Counter: ' + this.shotCounter, { color: 'white', fontSize: 'large' });
-        this.scoreText = this.add.text(0, 15, 'Score: ' + this.score, { color: 'white', fontSize: 'large' });
-        this.percentText = this.add.text(0, 30, 'Percentage: ' + this.percentage, { color: 'white', fontSize: 'large'});
+        this.shotText = this.add.text(0, 0, 'Shot Counter: ' + this.shotCounter, { color: 'white', fontSize: '30px', fontFamily: "Georgia, serif" });
+        this.scoreText = this.add.text(0, 25, 'Score: ' + this.score, { color: 'white', fontSize: '30px', fontFamily: "Georgia, serif" });
+        this.percentText = this.add.text(0, 50, 'Percentage: ' + this.percentage, { color: 'white', fontSize: '30px', fontFamily: "Georgia, serif"});
 
         // add cup
-        this.cup = this.physics.add.sprite(width / 2, height / 10, 'cup')
+        this.cup = this.physics.add.sprite(width / 2, height / 10 + 10, 'cup')
         this.cup.body.setCircle(this.cup.width / 4)
         this.cup.body.setOffset(this.cup.width / 4)
         this.cup.body.setImmovable(true)
@@ -74,7 +74,7 @@ class Play extends Phaser.Scene {
             this.ball.body.setVelocityY(Phaser.Math.Between(this.SHOT_VELOCITY_Y_MIN, this.SHOT_VELOCITY_Y_MAX) * shotDirectionY)
             this.shotCounter += 1
             this.shotText.setText("Shot Counter: " + this.shotCounter)
-            this.percentText.setText("Percentage: " + this.score / this.shotCounter, 2)
+            this.percentText.setText("Percentage: " + (this.score / this.shotCounter).toFixed(2))
         })
 
         // cup/ball collision
@@ -85,7 +85,7 @@ class Play extends Phaser.Scene {
             this.ball.body.setVelocityY(0)
             this.score += 1
             this.scoreText.setText("Score: " + this.score)
-            this.percentText.setText("Percentage: " + this.score / this.shotCounter, 2)
+            this.percentText.setText("Percentage: " + (this.score / this.shotCounter).toFixed(2))
         })
 
         // ball/wall collision
